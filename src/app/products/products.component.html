@@ -1,0 +1,72 @@
+<c-navbar colorScheme="light" expand="lg" class="bg-light">
+    <c-container fluid>
+      <button [cNavbarToggler]="collapseRef"></button>
+      <div #collapseRef="cCollapse" navbar cCollapse>
+        <a cNavbarBrand class="d-lg-block d-none">
+        <h1>Bigbasket</h1>  
+        </a>
+        <c-navbar-nav class="me-auto mb-2 mb-lg-0">
+          
+        </c-navbar-nav>
+        <form cForm class="d-flex" role="search">
+          <button cButton cOffcanvasToggle="OffcanvasStart">Add Product</button>
+        </form>
+      </div>
+    </c-container>
+  </c-navbar>
+  
+  
+  <c-offcanvas
+    placement="end"
+    id="OffcanvasStart"
+  >
+    <c-offcanvas-header>
+      <h5 cOffcanvasTitle>Add Product</h5>
+      <button
+        cButtonClose
+        class="text-reset ms-auto"
+        cOffcanvasToggle="OffcanvasStart"
+        aria-label="Close"
+      ></button>
+    </c-offcanvas-header>
+    <c-offcanvas-body>
+      
+        <app-form></app-form>
+      
+    </c-offcanvas-body>
+  </c-offcanvas>
+  
+  <div class="card-body">
+    <div class="row">
+      <div class="col-3" *ngFor="let product of products">
+        <c-col >
+          <c-card class="mb-3">
+            <img cCardImg="top" [src]="product.productImageUrl">
+            <c-card-body>
+              <h5 cCardTitle>{{product.productName}}</h5>
+              <p cCardText>
+                  {{product.price}}
+                  {{product.productSku}}
+              </p>
+              <p cCardText>
+                <small class="text-medium-emphasis">By User</small>
+              </p>
+            </c-card-body>
+            <c-card-footer>
+                <div class = "row-3">
+                    <a class="btn btn-primary" cOffcanvasToggle="OffcanvasStart" (click)="onEdit(product)">Edit</a>
+                    <a class="btn btn-danger mx-2" (click)="onDelete(product)">Delete </a>
+                  </div>
+            </c-card-footer>
+            
+           
+          
+          </c-card>
+        </c-col>
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  

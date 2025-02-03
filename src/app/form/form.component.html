@@ -1,0 +1,58 @@
+<div class="form-container">
+    <form [formGroup] = "productForm" id="OffcanvasStart" class="mt-5" style="max-width: 700px;">
+      <div class="row">
+        <!-- First Column -->
+        <div class="col-md-6 mb-3">
+          <label cLabel for="inputProductName">Product Name</label>
+          <input cFormControl id="inputProductName" type="text" class="form-control" formControlName="productName">
+        </div>
+        
+        <!-- Second Column -->
+        <div class="col-md-6 mb-3">
+          <label cLabel for="inputSKU">SKU</label>
+          <input cFormControl id="inputSKU" type="text" class="form-control" formControlName="productSku">
+        </div>
+      </div>
+    
+      <div class="row">
+        <!-- First Column -->
+        <div class="col-md-6 mb-3">
+          <label cLabel for="inputShortName">Product Short Name</label>
+          <input cFormControl id="inputShortName" type="text" class="form-control" formControlName="productShortName">
+        </div>
+    
+        <!-- Second Column -->
+        <div class="col-md-6 mb-3">
+          <label cLabel for="inputPrice">Product Price</label>
+          <input cFormControl id="inputPrice" type="text" class="form-control" formControlName="productPrice">
+        </div>
+      </div>
+    
+      <div class="row">
+        <!-- First Column -->
+        <div class="col-md-6 mb-3">
+          <label cLabel for="inputCategory">Category</label>
+            <!-- Add category options here -->
+            <select formControlName="categoryId" class="form-select">
+              <option *ngFor="let cate of categoryList" [value]="cate.categoryId">
+               {{cate.categoryName}}
+           </option>
+               </select>
+        </div>
+    
+        <!-- Second Column -->
+        <div class="col-md-6 mb-3">
+          <label cLabel for="inputImageUrl">Image URL</label>
+          <input cFormControl id="inputImageUrl" type="text" class="form-control" formControlName="productImageUrl">
+        </div>
+      </div>
+    
+      <!-- Submit Button -->
+      <div class="row"  >
+        <div class="col-md-12">
+          <input cButton color="primary" type="submit" class="btn btn-primary w-100" (click)="onSave()">
+        </div>
+      </div>
+    </form>
+  </div>
+  
