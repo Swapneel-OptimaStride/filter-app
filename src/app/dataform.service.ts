@@ -16,6 +16,20 @@ export class DataformService {
   return this._prodObj;
 
  }
+ makeFieldsBlank()
+ {
+  this.prodObj = {
+    id: 0,
+    productName: '',
+    productSku: '',
+    productPrice: '',
+    productShortName: '',
+    productDescription: '',
+    deliveryTimeSpan: '',
+    categoryId: '',
+    productImageUrl: '',
+  };
+ }
   viewData()
   {
     console.log(this.prodObj);

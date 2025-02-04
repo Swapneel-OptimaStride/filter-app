@@ -81,36 +81,7 @@ export class ProductsComponent implements OnInit{
         });
       }
     
-    onUpdate()
-    {
-      this.productSrv.updateProduct(this.productObj).subscribe((res:any)=>{
-        if(res)
-        {
-          alert("product updated ");
-          
-         
-          this.productObj = {
-            "id": "",
-            "productSku": "",
-            "productName": "",
-            "productPrice": 0,
-            "productShortName": "",
-            "productDescription": "",
-            "createdDate": new Date(),
-            "deliveryTimeSpan": "",
-            "categoryId": 0,
-            "productImageUrl": ""
-          };
-    
-          this.productSrv.getProducts();
-    
-        }
-        else
-        {
-          alert(res.message);
-        }
-      });
-    }
+   
     // makefieldsBlank()
     // {
     //   this.productForm = new FormGroup({
@@ -124,6 +95,10 @@ export class ProductsComponent implements OnInit{
     //     categoryId: new FormControl(''),
     //     productImageUrl: new FormControl(''),
     //   });
+    makefieldsBlank()
+    {
+      this.dataForm.makeFieldsBlank();
+    }
     onEdit(item:any)
     {
       // console.log(item);
@@ -133,6 +108,36 @@ export class ProductsComponent implements OnInit{
       
   
     }
+    // onUpdate()
+    // {
+    //   this.productSrv.updateProduct(this.productObj).subscribe((res:any)=>{
+    //     if(res)
+    //     {
+    //       alert("product updated ");
+          
+         
+    //       this.productObj = {
+    //         "id": "",
+    //         "productSku": "",
+    //         "productName": "",
+    //         "productPrice": 0,
+    //         "productShortName": "",
+    //         "productDescription": "",
+    //         "createdDate": new Date(),
+    //         "deliveryTimeSpan": "",
+    //         "categoryId": 0,
+    //         "productImageUrl": ""
+    //       };
+    
+    //       this.productSrv.getProducts();
+    
+    //     }
+    //     else
+    //     {
+    //       alert(res.message);
+    //     }
+    //   });
+    // }
     onDelete(item:any)
     {
       console.log(item.productName);

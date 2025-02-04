@@ -18,11 +18,12 @@ import { EventEmitter } from '@angular/core';
 import { CrudService } from '../crud.service';
 import { ProductService } from '../product.service';
 import { DataformService } from '../dataform.service';
+import { OffcanvasModule } from '@coreui/angular';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,OffcanvasModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
@@ -55,8 +56,8 @@ export class FormComponent implements OnInit {
       productSku: new FormControl(" ", [Validators.required]),
       productPrice: new FormControl(" ", [Validators.required,Validators.pattern('^[0-9]*$')]),
       productShortName: new FormControl(" ", [Validators.required]),
-      productDescription: new FormControl(" ", [Validators.required]),
-      deliveryTimeSpan: new FormControl(" ", [Validators.required]),
+      productDescription: new FormControl(" "),
+      deliveryTimeSpan: new FormControl(" "),
       categoryId: new FormControl(" ", [Validators.required]),
       productImageUrl: new FormControl(" ", [Validators.required]),
     });
@@ -97,17 +98,22 @@ export class FormComponent implements OnInit {
     });
 
   }
+  id:any;
   ngOnInit(): void {
 
     this.getAllCategory();
     this.dataSrv.observeProduct.subscribe((data)=>
       {
-        console.log("watching in form - value changed");
+        // console.log("watching in form - value changed");
         
         this.productForm.patchValue(data);
+         this.id = data.id;
       });
-      
+      // this.id = this.dataSrv.prodObj.id;
       this.productForm.patchValue(this.dataSrv.prodObj);
+  }
+  resetForm(): void {
+    this.productForm.reset(); 
   }
 
   onSave()
@@ -130,13 +136,14 @@ export class FormComponent implements OnInit {
       
       if(res)
       {
-        console.log(res);
+        // console.log(res);
         
         alert("product Created");
         
         this.crudService.getProducts();
         this.makefieldsBlank();
         this.crudService.viewProducts();
+        // this.offcanvas.hide();
 
       }
       else
@@ -145,7 +152,36 @@ export class FormComponent implements OnInit {
       }
     });
   }
-
+  onUpdate()
+  {
+    this.productSrv.updateProduct(this.dataSrv.prodObj).subscribe((res:any)=>{
+      if(res)
+      {
+        alert("product updated ");
+        
+       
+        this.dataSrv.prodObj= {
+          "id": "",
+          "productSku": "",
+          "productName": "",
+          "productPrice": 0,
+          "productShortName": "",
+          "productDescription": "",
+          "createdDate": new Date(),
+          "deliveryTimeSpan": "",
+          "categoryId": 0,
+          "productImageUrl": ""
+        };
+  
+        this.productSrv.getProducts();
+  
+      }
+      else
+      {
+        alert(res.message);
+      }
+    });
+  }
   dummyObj: any[] = [];
 
   // patchValueinForm()
@@ -154,7 +190,7 @@ export class FormComponent implements OnInit {
     
    
   // }
-  
+
 
  
 

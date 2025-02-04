@@ -1,12 +1,12 @@
-<div class="card">
+<div class="card temp">
   <div class="card-header">
     <h5>Product Form</h5>
   </div>
   <div class="card-body">
-    <form [formGroup]="productForm" id="OffcanvasStart" style="max-width: 700px;">
+    <form [formGroup]="productForm" id="OffcanvasStart">
       <div class="row">
         <!-- Product Name Field -->
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 mb-1">
           <label cLabel for="inputProductName">Product Name</label>
           <input cFormControl id="inputProductName" type="text" class="form-control" formControlName="productName"
             [ngClass]="{'is-invalid': productForm.get('productName')?.invalid && productForm.get('productName')?.touched}">
@@ -16,7 +16,7 @@
         </div>
 
         <!-- SKU Field -->
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 mb-1">
           <label cLabel for="inputSKU">SKU</label>
           <input cFormControl id="inputSKU" type="text" class="form-control" formControlName="productSku"
             [ngClass]="{'is-invalid': productForm.get('productSku')?.invalid && productForm.get('productSku')?.touched}">
@@ -26,7 +26,7 @@
         </div>
 
         <!-- Product Short Name Field -->
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 mb-1">
           <label cLabel for="inputShortName">Product Short Name</label>
           <input cFormControl id="inputShortName" type="text" class="form-control" formControlName="productShortName"
             [ngClass]="{'is-invalid': productForm.get('productShortName')?.invalid && productForm.get('productShortName')?.touched}">
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Product Price Field -->
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 mb-1">
           <label cLabel for="inputPrice">Product Price</label>
           <input cFormControl id="inputPrice" type="text" class="form-control" formControlName="productPrice"
             [ngClass]="{'is-invalid': productForm.get('productPrice')?.invalid && productForm.get('productPrice')?.touched}">
@@ -46,7 +46,7 @@
         </div>
 
         <!-- Category Field -->
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 mb-1">
           <label cLabel for="inputCategory">Category</label>
           <select formControlName="categoryId" class="form-select"
             [ngClass]="{'is-invalid': productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched}">
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Image URL Field -->
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 mb-1">
           <label cLabel for="inputImageUrl">Image URL</label>
           <input cFormControl id="inputImageUrl" type="text" class="form-control" formControlName="productImageUrl"
             [ngClass]="{'is-invalid': productForm.get('productImageUrl')?.invalid && productForm.get('productImageUrl')?.touched}">
@@ -71,9 +71,22 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="col-md-12">
-          <button cButton color="primary" type="submit" class="btn btn-primary w-100" (click)="onSave()" [disabled]="productForm.invalid">
+        <div *ngIf="id == 0" class="col-mb-20">
+          <button cButton color="primary" type="submit" class="btn btn-primary w-100" cOffcanvasToggle="OffcanvasStart" (click)="onSave() " [disabled]="productForm.invalid">
             Save
+          </button>
+        </div>
+
+        <div *ngIf="id > 0"  class="col-mb-20">
+          <button cButton color="primary" type="submit" class="btn btn-primary w-100" cOffcanvasToggle="OffcanvasStart" (click)="onUpdate()">
+            Update
+          </button>
+        </div>
+
+        <!-- Reset Button -->
+        <div class="col-md-12">
+          <button type="button" class="btn btn-success w-100" (click)="resetForm()">
+            Reset
           </button>
         </div>
       </div>

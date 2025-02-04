@@ -3,7 +3,7 @@ import '@angular/localize/init';
 
 export const routes: Routes = [
   {
-    path: 'products',
+    path: '',
     loadComponent: () => import('./products.component').then(m => m.ProductsComponent),
     title: 'Products',
   }

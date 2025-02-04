@@ -20,6 +20,7 @@ export class ProductService {
     
     return this.http.post(Constant.API_END_POINT+Constant.METHODS.CREATE_PRODUCT,obj,{observe: 'response'});
   }
+  
   updateProduct(obj: any) {
     return this.http.put(Constant.API_END_POINT+Constant.METHODS.UPDATE_PRODUCT+obj.id, obj);
   }

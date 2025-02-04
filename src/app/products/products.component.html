@@ -9,7 +9,7 @@
           
         </c-navbar-nav>
         <form cForm class="d-flex" role="search">
-          <button cButton cOffcanvasToggle="OffcanvasStart">Add Product</button>
+          <button cButton cOffcanvasToggle="OffcanvasStart" (click)="makefieldsBlank()">Add Product</button>
         </form>
       </div>
     </c-container>
@@ -69,35 +69,38 @@
   </div>
   
    -->
-  
-   <div class="card-body">
+   <div class="container">
     <div class="row">
-      <div class="temp" *ngFor="let product of products">
-        <c-col>
-          <c-card class="mb-3 h-100" style="border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            <!-- Card Image -->
-            <img cCardImg="top" [src]="product.productImageUrl" class="img-fluid" style="height: 180px; object-fit: cover;">
-            <c-card-body class="p-3">
-              <h5 cCardTitle class="mb-2">{{product.productName}}</h5>
-              <p cCardText class="mb-1">
-                <strong>{{product.price | currency}}</strong>
-              </p>
-              <p cCardText class="text-muted mb-3">
-                SKU: {{product.productSku}}
-              </p>
-              <p cCardText class="text-muted mb-3">
-                <small>By User</small>
-              </p>
-            </c-card-body>
-            <c-card-footer class="p-2">
-              <div class="d-flex justify-content-between">
-                <a class="btn btn-primary btn-sm" cOffcanvasToggle="OffcanvasStart" (click)="onEdit(product)">Edit</a>
-                <a class="btn btn-danger btn-sm" (click)="onDelete(product)">Delete</a>
-              </div>
-            </c-card-footer>
-          </c-card>
-        </c-col>
+      <!-- Loop through each product and display it in a grid column -->
+      <div class="col-12 col-sm-6 col-md-4" *ngFor="let product of products">
+        <c-card class="mb-3 card-container">
+          <!-- Card Image -->
+          <img cCardImg="top" [src]="product.productImageUrl" class="img-fluid card-img" style="height: 180px;">
+          <c-card-body class="p-3">
+            <h5 cCardTitle class="mb-2">{{product.productName}}</h5>
+            <p cCardText class="mb-1">
+              <strong>{{product.price | currency}}</strong>
+            </p>
+            <p cCardText class="text-muted mb-3">
+              SKU: {{product.productSku}}
+            </p>
+            <p cCardText class="text-muted mb-3">
+              <small>By User</small>
+            </p>
+          </c-card-body>
+          <c-card-footer class="p-2">
+            <div class="d-flex justify-content-between">
+              <a class="btn btn-primary btn-sm" cOffcanvasToggle="OffcanvasStart" (click)="onEdit(product)">Edit</a>
+              <a class="btn btn-danger btn-sm" (click)="onDelete(product)">Delete</a>
+            </div>
+          </c-card-footer>
+        </c-card>
       </div>
     </div>
   </div>
+  
+  
+  
+  
+  
   
