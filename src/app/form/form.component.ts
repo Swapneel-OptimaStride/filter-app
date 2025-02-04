@@ -13,7 +13,7 @@
 // }
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { CrudService } from '../crud.service';
 import { ProductService } from '../product.service';
@@ -51,20 +51,21 @@ export class FormComponent implements OnInit {
   initializeForm() {
     this.productForm = new FormGroup({
       id: new FormControl(0),
-      productName: new FormControl(''),
-      productSku: new FormControl(''),
-      productPrice: new FormControl(''),
-      productShortName: new FormControl(''),
-      productDescription: new FormControl(''),
-      deliveryTimeSpan: new FormControl(''),
-      categoryId: new FormControl(''),
-      productImageUrl: new FormControl(''),
+      productName: new FormControl(" ", [Validators.required]),
+      productSku: new FormControl(" ", [Validators.required]),
+      productPrice: new FormControl(" ", [Validators.required,Validators.pattern('^[0-9]*$')]),
+      productShortName: new FormControl(" ", [Validators.required]),
+      productDescription: new FormControl(" ", [Validators.required]),
+      deliveryTimeSpan: new FormControl(" ", [Validators.required]),
+      categoryId: new FormControl(" ", [Validators.required]),
+      productImageUrl: new FormControl(" ", [Validators.required]),
     });
   }
   constructor(private crudService: CrudService,private productSrv: ProductService,private dataSrv: DataformService)
   {
     this.initializeForm();
   }
+  
 
 
 //  onClick()
@@ -153,6 +154,7 @@ export class FormComponent implements OnInit {
     
    
   // }
+  
 
  
 

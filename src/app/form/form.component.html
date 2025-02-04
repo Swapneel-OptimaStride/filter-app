@@ -1,58 +1,127 @@
-<div class="form-container">
-    <form [formGroup] = "productForm" id="OffcanvasStart" class="mt-5" style="max-width: 700px;">
+<div class="card">
+  <div class="card-header">
+    <h5>Product Form</h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="productForm" id="OffcanvasStart" class="mt-5" style="max-width: 700px;">
       <div class="row">
         <!-- First Column -->
-        <div class="col-md-6 mb-3">
+        <div class="col-md-10 mb-6">
           <label cLabel for="inputProductName">Product Name</label>
-          <input cFormControl id="inputProductName" type="text" class="form-control" formControlName="productName">
+          <input cFormControl id="inputProductName" type="text" class="form-control" formControlName="productName"
+            [ngClass]="{'is-invalid': productForm.get('productName')?.invalid && productForm.get('productName')?.touched}">
+          <div *ngIf="productForm.get('productName')?.invalid && productForm.get('productName')?.touched" class="invalid-feedback">
+            Product Name is required.
+          </div>
+          <label cLabel for="inputSKU">SKU</label>
+          <input cFormControl id="inputSKU" type="text" class="form-control" formControlName="productSku"
+            [ngClass]="{'is-invalid': productForm.get('productSku')?.invalid && productForm.get('productSku')?.touched}">
+          <div *ngIf="productForm.get('productSku')?.invalid && productForm.get('productSku')?.touched" class="invalid-feedback">
+            SKU is required.
+          </div>
+          <label cLabel for="inputShortName">Product Short Name</label>
+          <input cFormControl id="inputShortName" type="text" class="form-control" formControlName="productShortName"
+            [ngClass]="{'is-invalid': productForm.get('productShortName')?.invalid && productForm.get('productShortName')?.touched}">
+          <div *ngIf="productForm.get('productShortName')?.invalid && productForm.get('productShortName')?.touched" class="invalid-feedback">
+            Product Short Name is required.
+          </div>
+          <label cLabel for="inputPrice">Product Price</label>
+          <input cFormControl id="inputPrice" type="text" class="form-control" formControlName="productPrice"
+            [ngClass]="{'is-invalid': productForm.get('productPrice')?.invalid && productForm.get('productPrice')?.touched}">
+          <div *ngIf="productForm.get('productPrice')?.invalid && productForm.get('productPrice')?.touched" class="invalid-feedback">
+            Product Price is required and must be a valid number.
+          </div>
+          <div class="row">
+            <!-- First Column -->
+            <div class="col-md-10 mb-6">
+              <label cLabel for="inputCategory">Category</label>
+              <select formControlName="categoryId" class="form-select"
+                [ngClass]="{'is-invalid': productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched}">
+                <option value="" disabled>Select Category</option>
+                <option *ngFor="let cate of categoryList" [value]="cate.categoryId">
+                  {{cate.categoryName}}
+                </option>
+              </select>
+              <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="invalid-feedback">
+                Category is required.
+              </div>
+            </div>
+            <label cLabel for="inputImageUrl">Image URL</label>
+            <input cFormControl id="inputImageUrl" type="text" class="form-control" formControlName="productImageUrl"
+              [ngClass]="{'is-invalid': productForm.get('productImageUrl')?.invalid && productForm.get('productImageUrl')?.touched}">
+            <div *ngIf="productForm.get('productImageUrl')?.invalid && productForm.get('productImageUrl')?.touched" class="invalid-feedback">
+              Image URL is required.
+            </div>
+          </div>
         </div>
         
         <!-- Second Column -->
-        <div class="col-md-6 mb-3">
+        <!-- <div class="col-md-10 mb-6">
           <label cLabel for="inputSKU">SKU</label>
-          <input cFormControl id="inputSKU" type="text" class="form-control" formControlName="productSku">
+          <input cFormControl id="inputSKU" type="text" class="form-control" formControlName="productSku"
+            [ngClass]="{'is-invalid': productForm.get('productSku')?.invalid && productForm.get('productSku')?.touched}">
+          <div *ngIf="productForm.get('productSku')?.invalid && productForm.get('productSku')?.touched" class="invalid-feedback">
+            SKU is required.
+          </div>
         </div>
-      </div>
+      </div> -->
     
-      <div class="row">
+      <!-- <div class="row"> -->
         <!-- First Column -->
-        <div class="col-md-6 mb-3">
-          <label cLabel for="inputShortName">Product Short Name</label>
-          <input cFormControl id="inputShortName" type="text" class="form-control" formControlName="productShortName">
+        <!-- <div class="col-md-6 mb-3"> -->
+          <!-- <label cLabel for="inputShortName">Product Short Name</label>
+          <input cFormControl id="inputShortName" type="text" class="form-control" formControlName="productShortName"
+            [ngClass]="{'is-invalid': productForm.get('productShortName')?.invalid && productForm.get('productShortName')?.touched}">
+          <div *ngIf="productForm.get('productShortName')?.invalid && productForm.get('productShortName')?.touched" class="invalid-feedback">
+            Product Short Name is required.
+          </div> -->
         </div>
     
         <!-- Second Column -->
-        <div class="col-md-6 mb-3">
+        <!-- <div class="col-md-6 mb-3">
           <label cLabel for="inputPrice">Product Price</label>
-          <input cFormControl id="inputPrice" type="text" class="form-control" formControlName="productPrice">
+          <input cFormControl id="inputPrice" type="text" class="form-control" formControlName="productPrice"
+            [ngClass]="{'is-invalid': productForm.get('productPrice')?.invalid && productForm.get('productPrice')?.touched}">
+          <div *ngIf="productForm.get('productPrice')?.invalid && productForm.get('productPrice')?.touched" class="invalid-feedback">
+            Product Price is required and must be a valid number.
+          </div>
         </div>
       </div>
     
       <div class="row">
-        <!-- First Column -->
+        First Column
         <div class="col-md-6 mb-3">
           <label cLabel for="inputCategory">Category</label>
-            <!-- Add category options here -->
-            <select formControlName="categoryId" class="form-select">
-              <option *ngFor="let cate of categoryList" [value]="cate.categoryId">
-               {{cate.categoryName}}
-           </option>
-               </select>
+          <select formControlName="categoryId" class="form-select"
+            [ngClass]="{'is-invalid': productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched}">
+            <option value="" disabled>Select Category</option>
+            <option *ngFor="let cate of categoryList" [value]="cate.categoryId">
+              {{cate.categoryName}}
+            </option>
+          </select>
+          <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="invalid-feedback">
+            Category is required.
+          </div>
         </div>
-    
+     -->
         <!-- Second Column -->
-        <div class="col-md-6 mb-3">
+        <!-- <div class="col-md-6 mb-3">
           <label cLabel for="inputImageUrl">Image URL</label>
-          <input cFormControl id="inputImageUrl" type="text" class="form-control" formControlName="productImageUrl">
+          <input cFormControl id="inputImageUrl" type="text" class="form-control" formControlName="productImageUrl"
+            [ngClass]="{'is-invalid': productForm.get('productImageUrl')?.invalid && productForm.get('productImageUrl')?.touched}">
+          <div *ngIf="productForm.get('productImageUrl')?.invalid && productForm.get('productImageUrl')?.touched" class="invalid-feedback">
+            Image URL is required.
+          </div>
         </div>
       </div>
-    
+     -->
       <!-- Submit Button -->
-      <div class="row"  >
+      <div class="row">
         <div class="col-md-12">
-          <input cButton color="primary" type="submit" class="btn btn-primary w-100" (click)="onSave()">
+          <button cButton color="primary" type="submit" class="btn btn-primary w-100" (click)="onSave()" [disabled]="productForm.invalid">
+            Save
+          </button>
         </div>
       </div>
     </form>
-  </div>
-  
+  </div>                              
