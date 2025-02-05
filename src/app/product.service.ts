@@ -22,6 +22,7 @@ export class ProductService {
   }
   
   updateProduct(obj: any) {
+    console.log("Inside Update");
     return this.http.put(Constant.API_END_POINT+Constant.METHODS.UPDATE_PRODUCT+obj.id, obj);
   }
   deleteProduct(id: any) {

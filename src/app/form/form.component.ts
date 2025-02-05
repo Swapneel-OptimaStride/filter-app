@@ -154,7 +154,20 @@ export class FormComponent implements OnInit {
   }
   onUpdate()
   {
-    this.productSrv.updateProduct(this.dataSrv.prodObj).subscribe((res:any)=>{
+    let prodForApi: any  = {
+      "id": this.productForm.value.id,
+      "productSku": this.productForm.value.productSku,
+      "productName": this.productForm.value.productName,
+      "productPrice": this.productForm.value.productPrice,
+      "productShortName": this.productForm.value.productShortName,
+      "productDescription": this.productForm.value.productDescription,
+      "createdDate": this.productForm.value.createdDate,
+      "deliveryTimeSpan": this.productForm.value.deliveryTimeSpan,
+      "categoryId": this.productForm.value.categoryId,
+      "productImageUrl": this.productForm.value.productImageUrl
+    }
+    console.log(this.dataSrv.prodObj,"FormValues",this.productForm.value);
+    this.productSrv.updateProduct(prodForApi).subscribe((res:any)=>{
       if(res)
       {
         alert("product updated ");
