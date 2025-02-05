@@ -85,9 +85,13 @@
 
         <!-- Reset Button -->
         <div class="col-md-12">
-          <button type="button" class="btn btn-success w-100" (click)="resetForm()">
-            Reset
-          </button>
+          <button 
+          type="button" 
+          class="btn btn-success w-100" 
+          (click)="resetForm()" 
+          [disabled]="id > 0">
+          Reset
+        </button>
         </div>
       </div>
     </form>

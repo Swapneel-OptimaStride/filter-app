@@ -102,6 +102,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAllCategory();
+    
     this.dataSrv.observeProduct.subscribe((data)=>
       {
         // console.log("watching in form - value changed");
@@ -166,7 +167,8 @@ export class FormComponent implements OnInit {
       "categoryId": this.productForm.value.categoryId,
       "productImageUrl": this.productForm.value.productImageUrl
     }
-    console.log(this.dataSrv.prodObj,"FormValues",this.productForm.value);
+    console.log("FormValues", this.productForm.value);
+    // this.dataSrv.prodObj = this.productForm.value;
     this.productSrv.updateProduct(prodForApi).subscribe((res:any)=>{
       if(res)
       {
@@ -186,7 +188,7 @@ export class FormComponent implements OnInit {
           "productImageUrl": ""
         };
   
-        this.productSrv.getProducts();
+        this.crudService.getProducts();
   
       }
       else
