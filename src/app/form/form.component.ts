@@ -19,6 +19,8 @@ import { CrudService } from '../crud.service';
 import { ProductService } from '../product.service';
 import { DataformService } from '../dataform.service';
 import { OffcanvasModule } from '@coreui/angular';
+// import { log } from 'console';
+// import { log } from 'console';
 
 @Component({
   selector: 'app-form',
@@ -58,7 +60,7 @@ export class FormComponent implements OnInit {
       productShortName: new FormControl(" ", [Validators.required]),
       productDescription: new FormControl(" "),
       deliveryTimeSpan: new FormControl(" "),
-      categoryId: new FormControl(" ", [Validators.required]),
+      categoryId: new FormControl(" "),
       productImageUrl: new FormControl(" ", [Validators.required]),
     });
   }
@@ -93,7 +95,11 @@ export class FormComponent implements OnInit {
  getAllCategory()
   {
     this.productSrv.getCategory().subscribe((res:any)=>{
-      this.categoryList = res.data;
+      console.log("Res", res[0].data);
+      //res data is coming undefined that is the reason it is not being stored in categorylist
+      this.categoryList = res[0].data;  
+      console.log("Categorylist-->",this.categoryList);
+      
 
     });
 

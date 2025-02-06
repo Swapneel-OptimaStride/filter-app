@@ -1,7 +1,7 @@
 export const Constant = {
-    Categories_API_END_POINT: 'http://localhost:3002/',
+    Categories_API_END_POINT: 'https://677d07cc4496848554c8b586.mockapi.io/bigbasket/',
     API_END_POINT: 'https://677d07cc4496848554c8b586.mockapi.io/bigbasket/',
-    API_END_POINT_USER: 'http://localhost:3002/User/',
+    API_END_POINT_USER: 'https://677d07cc4496848554c8b586.mockapi.io/bigbasket/User/',
     METHODS: {
       GET_ALL_PRODUCT: 'products',
     //GET_PRODUCT_BY_ID: 'GetProductById?id=',
