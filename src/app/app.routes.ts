@@ -63,7 +63,12 @@ export const routes: Routes = [
       // component: ProductsComponent
     
   },
-     
+  {
+  path: 'filter',
+  loadChildren: () => import("./filter/routes").then((m) => m.routes)
+  // component: ProductsComponent
+
+},
     ]
   },
  

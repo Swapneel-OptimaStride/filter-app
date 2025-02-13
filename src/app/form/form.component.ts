@@ -95,10 +95,10 @@ export class FormComponent implements OnInit {
  getAllCategory()
   {
     this.productSrv.getCategory().subscribe((res:any)=>{
-      console.log("Res", res[0].data);
+      // console.log("Res", res[0].data);
       //res data is coming undefined that is the reason it is not being stored in categorylist
       this.categoryList = res[0].data;  
-      console.log("Categorylist-->",this.categoryList);
+      // console.log("Categorylist-->",this.categoryList);
       
 
     });

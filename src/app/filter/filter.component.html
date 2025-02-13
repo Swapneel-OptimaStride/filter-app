@@ -1,0 +1,75 @@
+<div style="background-color: lightgreen; text-align: center;">
+    <button [cModalToggle]="withPopoverModal.id" cButton>Filter</button>
+  
+    <c-modal #withPopoverModal alignment="center" id="withPopoverModal" style="width: 600px; height: 600px;">
+      <c-modal-header style="padding-top: 5px;"> <!-- Reduced padding at the top -->
+        <button [cModalToggle]="withPopoverModal.id" cButtonClose></button>
+      </c-modal-header>
+  
+      <div class="container mt-5 form-scroll-container" style="overflow-y: auto; height: calc(100% - 120px);">
+        <form>
+          <!-- Fixed Heading for Facts, Operations, and Values -->
+          <div class="row">
+            <div class="col">
+              <h5>Facts</h5>
+            </div>
+            <div class="col">
+              <h5>Operations</h5>
+            </div>
+            <div class="col">
+              <h5>Values</h5>
+            </div>
+          </div>
+  
+          <!-- Form Fields (Removed individual headings) -->
+          <div *ngFor="let section of formSections; let i = index" class="row">
+            <!-- Dropdown Field (Removed label) -->
+            <div class="col">
+              <select class="form-select" id="dropdown{{i}}" required (change)="onSelectChange($event, i)">
+                <option value="" disabled selected>Select an option</option>
+                <option *ngFor="let category of categories" [value]="category.type">
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
+  
+            <!-- Operations Field (Removed label) -->
+            <div class="col">
+              <select class="form-select" id="operationDropdown{{i}}" required (change)="selectOperation($event, i)">
+                <option value="" disabled selected>Select an operation</option>
+                <option *ngFor="let operation of OperationsList" [value]="operation">{{ operation }}</option>
+              </select>
+            </div>
+  
+            <!-- Text Field for Value (Removed label) -->
+            <div class="col">
+              <input type="text" class="form-control" id="textfield2{{i}}" placeholder="Enter Value" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required>
+            </div>
+  
+            <!-- Text Field for Value (Removed label) -->
+            <div class="col">
+                <c-form-check>
+                    <input cFormCheckInput id="checkOne" type="checkbox" />
+                    <label cFormCheckLabel for="checkOne">Default checkbox</label>
+                  </c-form-check>
+            </div>
+  
+            <div *ngIf="flag === true">
+              <input cFormCheckInput type="radio" value="one" name="flexRadioDefault" />
+              <label cFormCheckLabel>And</label>
+  
+              <input cFormCheckInput type="radio" value="two" name="flexRadioDefault" checked />
+              <label cFormCheckLabel>Or</label>
+            </div>
+  
+          </div>
+        </form>
+      </div>
+
+      <c-modal-footer>
+        <button cButton color="secondary" (click)="createComponent()">New</button>
+        <button cButton color="primary" (click)="onDone()">Done</button>
+      </c-modal-footer>
+    </c-modal>
+  </div>
+  
