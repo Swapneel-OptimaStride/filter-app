@@ -5,6 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { ButtonDirective, ButtonGroupComponent, FormCheckInputDirective, FormCheckLabelDirective, FormModule, GridModule, ModalModule, PopoverModule, TooltipModule } from '@coreui/angular';
 
+interface Operations {
+  index: number;
+  operations: string[];
+}
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -16,14 +22,18 @@ import { ButtonDirective, ButtonGroupComponent, FormCheckInputDirective, FormChe
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
+
 export class FilterComponent implements OnInit {
   title = 'filter-app';
   categories: any[] = [];  // Stores available categories (Facts)
-  formSections: any[] = [{ category: '', operation: '', value: '', isFact: false }]; 
-  OperationsList: any = [];
+  formSections: any[] = [{ category: '', operation: '', value: '', isFact: false, isLast:false}]; 
+  OperationsList: Operations[] = [];
   selectedOperationType: string = '';
   valueOptions: any[] = [];  // Stores available values for dropdown
   isFactSelected: boolean[] = [];  // Tracks if a fact is selected for each section
+
+
+  
 
   operations = [
     { type: 'Number Operations', ops: ["=", ">", "<", "<=", ">=", "!="] },
@@ -46,11 +56,14 @@ export class FilterComponent implements OnInit {
       }
     );
   }
+  totalComp : number = 0;
 
   // Add a new form section
   createComponent() {
     this.formSections.push({ category: '', operation: '', value: '', isFact: false });
     this.isFactSelected.push(false);
+    this.totalComp = this.totalComp + 1;
+    // console.log(this.totalComp);
   }
 
   // Handle category selection (Facts Dropdown)
@@ -74,28 +87,60 @@ export class FilterComponent implements OnInit {
   //     this.updateValueDropdown(index);
   //   }
   // }
-  onSelectChange(event: any, index: number) {
+
+   selectedGroup: any[] = []; 
+   opList: any[] = [];
+  
+   onSelectChange(event: any, index: number) {
     const selectedCategory = event.target.value;
     this.formSections[index].category = selectedCategory; // Store the selected category
   
-    // Find operations for the selected category
+    console.log("Selected Category:", selectedCategory);  // Log the selected category
+  
+    // Find the selected operations group based on the category
     const selectedGroup = this.operations.find(group => group.type === `${selectedCategory} Operations`);
+    console.log("Selected Group:", selectedGroup);  // Log the selected group
+  
+    // Check if the selected group exists
     if (selectedGroup) {
-      this.OperationsList = selectedGroup.ops;
-      this.selectedOperationType = selectedCategory;
+      // If the index already exists in OperationsList, update it
+      const existingIndex = this.OperationsList.find(op => op.index === index);
+      
+      if (existingIndex) {
+        // Update the operations array for the existing index
+        existingIndex.operations = selectedGroup.ops;
+      } else {
+        // If no existing entry, create a new entry for that index
+        this.OperationsList.push({ index, operations: selectedGroup.ops });
+      }
+  
+      console.log('Updated OperationsList:', this.OperationsList);  // Log updated OperationsList
+      this.opList[index] = this.OperationsList[index].operations;
+      console.log("OpList:", this.opList);  
     } else {
-      this.OperationsList = [];
+      // If no operations group found, you can either leave it empty or handle accordingly
+      const existingIndex = this.OperationsList.find(op => op.index === index);
+      
+      if (existingIndex) {
+        existingIndex.operations = []; // Clear operations for the index
+      } else {
+        this.OperationsList.push({ index, operations: [] });
+      }
+  
+      console.log('No matching operations found, setting empty operations list');
     }
   
-    // Check if the selected category is a Fact
+    // Check if the selected category is a fact and update isFact
     const isFact = this.categories.some(category => category.type === 'fact' && category.name === selectedCategory);
     this.formSections[index].isFact = isFact;
   
-    // If it's a Fact, update the value dropdown
+    // If it's a fact, update the value dropdown
     if (isFact) {
-      this.updateValueDropdown(index); // Update value options based on selected fact type
+      this.updateValueDropdown(index);
     }
   }
+  
+  
   
   // Handle operation selection
   selectOperation(event: any, index: number) {
@@ -109,17 +154,7 @@ export class FilterComponent implements OnInit {
     this.formSections[index].isFact = true;
   }
 
-  // Update value dropdown when a fact is selected
-  // updateValueDropdown(index: number) {
-  //   this.http.get<any[]>('http://localhost:3003/table').subscribe(
-  //     (fields) => {
-  //       this.valueOptions = fields.filter(field => field.type === 'fact');
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching values:', error);
-  //     }
-  //   );
-  // }
+ 
   // Update value dropdown when a fact is selected
 updateValueDropdown(index: number) {
   const selectedFactType = this.formSections[index].category;
@@ -127,8 +162,9 @@ updateValueDropdown(index: number) {
   this.http.get<any[]>('http://localhost:3003/table').subscribe(
     (fields) => {
       // Filter out facts of the selected type, excluding the one that was already selected for this section
-      const filteredFacts = fields.filter(field => field.type === selectedFactType && field.name !== this.formSections[index].value);
+      const filteredFacts = fields.filter(field => field.type === selectedFactType && field.name !== this.formSections[index].value && field.name !== this.formSections[index].category);
       this.valueOptions = filteredFacts; // Update value options with filtered facts
+      console.log(this.valueOptions);
     },
     (error) => {
       console.error('Error fetching values:', error);
@@ -177,16 +213,20 @@ updateValueDropdown(index: number) {
   // }
   onTypeChange(value: string, id: number): void {
     console.log(value, id);
+    console.log(id);
     
     // Update the type for the corresponding form section
     this.formSections[id].type = value;
+    console.log(this.formSections[id].type);
 
     // If the type is 'value', set isFact to true
     if (value === 'value') {
       this.formSections[id].isFact = true;
+      this.updateValueDropdown(id);
     } else {
       this.formSections[id].isFact = false;
-      this.updateValueDropdown(id);
+      // console.log(this.formSections[id].isFact);
+      
     }
   }
 

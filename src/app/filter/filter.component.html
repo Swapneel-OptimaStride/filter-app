@@ -8,7 +8,7 @@
 
     <div class="container mt-5 form-scroll-container" style="overflow-y: auto; height: 240px;">
       <!-- Fixed Heading for Facts, Operations, and Values -->
-      <div class="row" style="display: flex; width: 100%; position: sticky; top: 0; background-color:rgb(254, 253, 252); z-index: 1;">
+      <div class="row" style="display: flex; width: 100%; position: sticky; top: 0; background-color: rgb(254, 253, 252); z-index: 1;">
         <div class="col" style="flex: 1 1 25%; text-align: center; font-weight: bold;">
           <h5>Facts</h5>
         </div>
@@ -37,7 +37,7 @@
           <div class="col">
             <select class="form-select" id="operationDropdown{{i}}" required (change)="selectOperation($event, i)">
               <option value="" disabled selected>Select an operation</option>
-              <option *ngFor="let operation of OperationsList" [value]="operation">{{ operation }}</option>
+              <option *ngFor="let operation of opList[i]" [value]="operation">{{ operation }}</option>
             </select>
           </div>
       
@@ -58,15 +58,25 @@
               <input type="text" class="form-control" id="textfield2{{i}}" placeholder="Enter Value" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required>
             </ng-container>
       
-            <ng-template #dropdown >
+            <ng-template #dropdown>
               <!-- Dropdown when fact is selected -->
-              <select class="form-select" id="valueDropdown{{i}}" [(ngModel)]="section.value"  [ngModelOptions]="{standalone: true}" required>
+              <select class="form-select" id="valueDropdown{{i}}" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required>
                 <option value="" disabled selected>Select a value</option>
                 <option *ngFor="let value of valueOptions" [value]="value.value">
                   {{ value.name }}
                 </option>
               </select>
             </ng-template>
+            
+            <!-- Add the center-aligned radio buttons inside the container div -->
+           
+          </div>
+          <div *ngIf="i<totalComp">
+            <input cFormCheckInput type="radio" value="one" name="flexRadioDefault" />
+            <label cFormCheckLabel>And</label>
+
+            <input cFormCheckInput type="radio" value="two" name="flexRadioDefault" checked />
+            <label cFormCheckLabel>Or</label>
           </div>
         </div>
       </form>
