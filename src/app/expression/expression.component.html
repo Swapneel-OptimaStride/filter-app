@@ -1,0 +1,43 @@
+<div class="row">
+    <!-- Dropdown Field for category selection -->
+    <!-- <div class="col">
+      <select class="form-select" id="dropdown{{index}}" required (change)="onCategoryChange($event)">
+        <option value="" disabled selected>Select an option</option>
+        <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+      </select>
+    </div> -->
+  
+    <!-- Operations Field -->
+    <!-- <div class="col">
+      <select class="form-select" id="operationDropdown{{index}}" required (change)="onOperationChange($event)">
+        <option value="" disabled selected>Select an operation</option>
+        <option *ngFor="let operation of opList[index]" [value]="operation">{{ operation }}</option>
+      </select>
+    </div> -->
+  
+    <!-- Type Selection Field -->
+    <!-- <div class="col">
+      <select class="form-select" id="typeDropdown{{index}}" (change)="onTypeChange($event.target.value)" required>
+        <option value="" disabled selected>Select Type</option>
+        <option value="static">Static</option>
+        <option value="value">Fact</option>
+        <option value="formula">Formula</option>
+      </select>
+    </div> -->
+  
+    <!-- Conditionally Render Text Field or Dropdown -->
+    <!-- <div class="col">
+      <ng-container *ngIf="formSections[index].isFact; else textField">
+        <select class="form-select" id="valueDropdown{{index}}" [(ngModel)]="formSections[index].value" [ngModelOptions]="{standalone: true}" required>
+          <option value="" disabled selected>Select a value</option>
+          <option *ngFor="let value of valueOptions" [value]="value.name">{{ value.name }}</option>
+        </select>
+      </ng-container> -->
+  
+      <!-- <ng-template #textField>
+        <input type="text" class="form-control" id="textfield{{index}}" placeholder="Enter Value" [(ngModel)]="formSections[index].value [ngModelOptions]="{standalone: true}" required>
+      </ng-template>
+    </div>
+  </div>
+   -->
+ 

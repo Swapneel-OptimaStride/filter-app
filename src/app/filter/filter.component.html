@@ -1,4 +1,4 @@
-<div style="background-color: lightgreen; text-align: center;">
+<!-- <div style="background-color: lightgreen; text-align: center;">
   <button [cModalToggle]="withPopoverModal.id" cButton>Filter</button>
 
   <c-modal #withPopoverModal alignment="center" id="withPopoverModal" style="width: 600px; height: 600px;">
@@ -6,9 +6,9 @@
       <button [cModalToggle]="withPopoverModal.id" cButtonClose></button>
     </c-modal-header>
 
-    <div class="container mt-5 form-scroll-container" style="overflow-y: auto; height: 240px;">
+    <div class="container mt-5 form-scroll-container" style="overflow-y: auto; height: 240px;"> -->
       <!-- Fixed Heading for Facts, Operations, and Values -->
-      <div class="row" style="display: flex; width: 100%; position: sticky; top: 0; background-color: rgb(254, 253, 252); z-index: 1;">
+      <!-- <div class="row" style="display: flex; width: 100%; position: sticky; top: 0; background-color: rgb(254, 253, 252); z-index: 1;">
         <div class="col" style="flex: 1 1 25%; text-align: center; font-weight: bold;">
           <h5>Facts</h5>
         </div>
@@ -23,55 +23,21 @@
 
       <form>
         <div *ngFor="let section of formSections; let i = index" class="row">
-          <!-- Dropdown Field for category selection -->
           <div class="col">
-            <select class="form-select" id="dropdown{{i}}" required (change)="onSelectChange($event, i)">
-              <option value="" disabled selected>Select an option</option>
-              <option *ngFor="let category of categories" [value]="category.type">
-                {{ category.name }}
-              </option>
-            </select>
-          </div>
-      
-          <!-- Operations Field -->
-          <div class="col">
-            <select class="form-select" id="operationDropdown{{i}}" required (change)="selectOperation($event, i)">
-              <option value="" disabled selected>Select an operation</option>
-              <option *ngFor="let operation of opList[i]" [value]="operation">{{ operation }}</option>
-            </select>
-          </div>
-      
-          <!-- Type Selection Field -->
-          <div class="col">
-            <select #option class="form-select" id="typeDropdown{{i}}" (change)="onTypeChange(option.value, i)" required>
-              <option value="" disabled selected>Select Type</option>
-              <option value="static">Static</option>
-              <option value="value">Fact</option>
-              <option value="formula">Formula</option>
-            </select>
-          </div>
-      
-          <!-- Conditionally Render Text Field or Dropdown -->
-          <div class="col">
-            <ng-container *ngIf="!isFieldCheckedForSection(i); else dropdown">
-              <!-- Text Field for Value -->
-              <input type="text" class="form-control" id="textfield2{{i}}" placeholder="Enter Value" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required>
-            </ng-container>
-      
-            <ng-template #dropdown>
-              <!-- Dropdown when fact is selected -->
-              <select class="form-select" id="valueDropdown{{i}}" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required>
-                <option value="" disabled selected>Select a value</option>
-                <option *ngFor="let value of valueOptions" [value]="value.value">
-                  {{ value.name }}
-                </option>
-              </select>
-            </ng-template>
-            
-            <!-- Add the center-aligned radio buttons inside the container div -->
-           
-          </div>
-          <div *ngIf="i<totalComp">
+            <app-expression 
+              [categories]="categories"
+              [opList]="opList[i]"
+              [section]="section"
+              [index]="i"
+              (onCategoryChange)="onSelectChange($event, i)"
+              (onOperationSelect)="selectOperation($event, i)"
+              (onTypeChange)="onTypeChange($event, i)"
+              (onFactSelected)="onFactSelected($event, i)">
+            </app-expression>
+          </div> -->
+
+          <!-- Add the center-aligned radio buttons inside the container div -->
+          <!-- <div *ngIf="i < totalComp">
             <input cFormCheckInput type="radio" value="one" name="flexRadioDefault" />
             <label cFormCheckLabel>And</label>
 
@@ -82,10 +48,11 @@
       </form>
       
     </div>
-
-    <c-modal-footer>
+  -->
+    <!-- <c-modal-footer>
       <button cButton color="secondary" (click)="createComponent()">New</button>
       <button cButton color="primary" (click)="onDone()">Done</button>
     </c-modal-footer>
   </c-modal>
-</div>
+</div>  -->
+<h1>Hello</h1>

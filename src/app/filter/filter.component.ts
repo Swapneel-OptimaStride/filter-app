@@ -4,6 +4,8 @@ import { Component, inject, OnInit, ViewContainerRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { ButtonDirective, ButtonGroupComponent, FormCheckInputDirective, FormCheckLabelDirective, FormModule, GridModule, ModalModule, PopoverModule, TooltipModule } from '@coreui/angular';
+import { ExpressionComponent } from '../expression/expression.component';
+
 
 interface Operations {
   index: number;
@@ -17,7 +19,7 @@ interface Operations {
   imports: [
     RouterOutlet, ModalModule, GridModule, PopoverModule, TooltipModule,
     CommonModule, FormsModule, ButtonGroupComponent, ButtonDirective,
-    FormCheckLabelDirective, ReactiveFormsModule, FormCheckInputDirective, FormModule
+    FormCheckLabelDirective, ReactiveFormsModule, FormCheckInputDirective, FormModule, ExpressionComponent
   ],
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
