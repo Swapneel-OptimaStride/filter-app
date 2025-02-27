@@ -1,43 +1,40 @@
 <div class="row">
-    <!-- Dropdown Field for category selection -->
-    <!-- <div class="col">
-      <select class="form-select" id="dropdown{{index}}" required (change)="onCategoryChange($event)">
+    <div class="col">
+      <select class="form-select" id="dropdown{{index}}" required (change)="onCategoryChangeHandler($event)">
         <option value="" disabled selected>Select an option</option>
         <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
       </select>
-    </div> -->
+    </div>
   
-    <!-- Operations Field -->
-    <!-- <div class="col">
-      <select class="form-select" id="operationDropdown{{index}}" required (change)="onOperationChange($event)">
+    <div class="col">
+      <select class="form-select" id="operationDropdown{{index}}" required (change)="onOperationChangeHandler($event)">
         <option value="" disabled selected>Select an operation</option>
-        <option *ngFor="let operation of opList[index]" [value]="operation">{{ operation }}</option>
+        <option *ngFor="let operation of opList" [value]="operation">{{ operation }}</option>
       </select>
-    </div> -->
+    </div>
   
-    <!-- Type Selection Field -->
-    <!-- <div class="col">
-      <select class="form-select" id="typeDropdown{{index}}" (change)="onTypeChange($event.target.value)" required>
+    <div class="col">
+      <select class="form-select" id="typeDropdown{{index}}" (change)="onTypeChangeHandler($event)" required>
         <option value="" disabled selected>Select Type</option>
         <option value="static">Static</option>
-        <option value="value">Fact</option>
+        <option value="fact">Fact</option>
         <option value="formula">Formula</option>
       </select>
-    </div> -->
+    </div>
   
-    <!-- Conditionally Render Text Field or Dropdown -->
-    <!-- <div class="col">
-      <ng-container *ngIf="formSections[index].isFact; else textField">
-        <select class="form-select" id="valueDropdown{{index}}" [(ngModel)]="formSections[index].value" [ngModelOptions]="{standalone: true}" required>
+    <div class="col">
+      <ng-container *ngIf="section.isFact; else textField">
+        <select class="form-select" id="valueDropdown{{index}}" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required>
           <option value="" disabled selected>Select a value</option>
           <option *ngFor="let value of valueOptions" [value]="value.name">{{ value.name }}</option>
         </select>
-      </ng-container> -->
+      </ng-container>
   
-      <!-- <ng-template #textField>
-        <input type="text" class="form-control" id="textfield{{index}}" placeholder="Enter Value" [(ngModel)]="formSections[index].value [ngModelOptions]="{standalone: true}" required>
+      <ng-template #textField>
+        <input type="text" class="form-control" id="textfield{{index}}" placeholder="Enter Value" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required >
       </ng-template>
     </div>
   </div>
-   -->
- 
+<!-- <button class = "container" (click)="onClick()"></button> -->
+
+

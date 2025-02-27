@@ -1,93 +1,93 @@
-/* Ensure the modal has a fixed height */
-c-modal {
-    max-height: 80vh; /* Adjust this value as needed */
-    overflow: hidden; /* Prevents modal from resizing */
-  }
+// /* Ensure the modal has a fixed height */
+// c-modal {
+//     max-height: 80vh; /* Adjust this value as needed */
+//     overflow: hidden; /* Prevents modal from resizing */
+//   }
   
-  /* Make the content inside the modal scrollable */
-  c-modal-body {
-    max-height: 60vh; /* Adjust as needed for content area */
-    overflow-y: auto; /* Allows scrolling when content overflows */
-  }
+//   /* Make the content inside the modal scrollable */
+//   c-modal-body {
+//     max-height: 60vh; /* Adjust as needed for content area */
+//     overflow-y: auto; /* Allows scrolling when content overflows */
+//   }
   
-  /* Optionally, adjust the size of the footer if needed */
-  c-modal-footer {
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    background-color: #fff; /* Background color for footer */
-    z-index: 1; /* Keeps the footer on top */
-  }
-  /* Style to make dropdowns, operations, and value fields scrollable */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-height: 300px; /* Set max height for each row to contain scrollable fields */
-    overflow-y: auto;
-  }
+//   /* Optionally, adjust the size of the footer if needed */
+//   c-modal-footer {
+//     position: sticky;
+//     bottom: 0;
+//     width: 100%;
+//     background-color: #fff; /* Background color for footer */
+//     z-index: 1; /* Keeps the footer on top */
+//   }
+//   /* Style to make dropdowns, operations, and value fields scrollable */
+// .row {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+//     max-height: 300px; /* Set max height for each row to contain scrollable fields */
+//     overflow-y: auto;
+//   }
   
-  /* Dropdown, Operations, and Value fields */
-  .col {
-    max-height: 200px; /* Adjust this value based on the field height */
-    overflow-y: auto; /* Adds a vertical scroll if content overflows */
-    padding-right: 10px; /* Optional: To prevent scrollbar overlap */
-  }
+//   /* Dropdown, Operations, and Value fields */
+//   .col {
+//     max-height: 200px; /* Adjust this value based on the field height */
+//     overflow-y: auto; /* Adds a vertical scroll if content overflows */
+//     padding-right: 10px; /* Optional: To prevent scrollbar overlap */
+//   }
   
-  select.form-select, input.form-control {
-    max-height: 150px; /* Prevent dropdown or input field from expanding too much */
-    overflow-y: auto;  /* Enable scroll when content exceeds */
-  }
+//   select.form-select, input.form-control {
+//     max-height: 150px; /* Prevent dropdown or input field from expanding too much */
+//     overflow-y: auto;  /* Enable scroll when content exceeds */
+//   }
   
-  /* Optional: Customize scrollbar for better appearance */
-  .col select.form-select::-webkit-scrollbar,
-  .col input.form-control::-webkit-scrollbar {
-    width: 8px;
-  }
+//   /* Optional: Customize scrollbar for better appearance */
+//   .col select.form-select::-webkit-scrollbar,
+//   .col input.form-control::-webkit-scrollbar {
+//     width: 8px;
+//   }
   
-  .col select.form-select::-webkit-scrollbar-thumb,
-  .col input.form-control::-webkit-scrollbar-thumb {
-    background-color: darkgray;
-    border-radius: 4px;
-  }
-  /* Style to make the container scrollable */
-.form-scroll-container {
-    max-height: 50vh; /* Adjust this height according to your design */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds the container height */
-    padding-right: 10px; /* Optional: Add some space for scrollbar */
-  }
+//   .col select.form-select::-webkit-scrollbar-thumb,
+//   .col input.form-control::-webkit-scrollbar-thumb {
+//     background-color: darkgray;
+//     border-radius: 4px;
+//   }
+//   /* Style to make the container scrollable */
+// .form-scroll-container {
+//     max-height: 50vh; /* Adjust this height according to your design */
+//     overflow-y: auto; /* Enable vertical scrolling if content exceeds the container height */
+//     padding-right: 10px; /* Optional: Add some space for scrollbar */
+//   }
   
-  /* Optional: Customize scrollbar appearance */
-  .form-scroll-container::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
-  }
+//   /* Optional: Customize scrollbar appearance */
+//   .form-scroll-container::-webkit-scrollbar {
+//     width: 8px; /* Width of the scrollbar */
+//   }
   
-  .form-scroll-container::-webkit-scrollbar-thumb {
-    background-color: darkgray;
-    border-radius: 4px;
-  }
-  .form-scroll-container {
-    max-height: 50vh; /* Adjust this height according to your design */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds the container height */
-    padding-right: 10px; /* Optional: Add some space for scrollbar */
-  }
+//   .form-scroll-container::-webkit-scrollbar-thumb {
+//     background-color: darkgray;
+//     border-radius: 4px;
+//   }
+//   .form-scroll-container {
+//     max-height: 50vh; /* Adjust this height according to your design */
+//     overflow-y: auto; /* Enable vertical scrolling if content exceeds the container height */
+//     padding-right: 10px; /* Optional: Add some space for scrollbar */
+//   }
   
-  /* Hide scrollbar but still make content scrollable */
-  .form-scroll-container::-webkit-scrollbar {
-    display: none; /* Hide the scrollbar */
-  }
+//   /* Hide scrollbar but still make content scrollable */
+//   .form-scroll-container::-webkit-scrollbar {
+//     display: none; /* Hide the scrollbar */
+//   }
   
-  .form-scroll-container {
-    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
-    scrollbar-width: none;     /* For Firefox */
-  }
-  /* Reduce top padding of modal header */
-c-modal-header {
-    padding-top: 2px; /* Adjust this value as needed */
-  }
+//   .form-scroll-container {
+//     // -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+//     scrollbar-width: none;     /* For Firefox */
+//   }
+//   /* Reduce top padding of modal header */
+// c-modal-header {
+//     padding-top: 2px; /* Adjust this value as needed */
+//   }
   
-  /* Alternatively, you can reduce the margin of the modal */
-  c-modal {
-    margin-top: 5px; /* Adjust this value as needed */
-  }
+//   /* Alternatively, you can reduce the margin of the modal */
+//   c-modal {
+//     margin-top: 5px; /* Adjust this value as needed */
+//   }
   

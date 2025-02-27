@@ -1,14 +1,18 @@
-<!-- <div style="background-color: lightgreen; text-align: center;">
+<div style="background-color: lightgreen; text-align: center;">
+  <!-- Button to trigger modal -->
   <button [cModalToggle]="withPopoverModal.id" cButton>Filter</button>
 
+  <!-- Modal for filter -->
   <c-modal #withPopoverModal alignment="center" id="withPopoverModal" style="width: 600px; height: 600px;">
+    
+    <!-- Modal Header -->
     <c-modal-header style="padding-top: 3px;">
       <button [cModalToggle]="withPopoverModal.id" cButtonClose></button>
     </c-modal-header>
 
-    <div class="container mt-5 form-scroll-container" style="overflow-y: auto; height: 240px;"> -->
+    <div class="container mt-5 form-scroll-container" style="overflow-y: auto; height: 240px;">
       <!-- Fixed Heading for Facts, Operations, and Values -->
-      <!-- <div class="row" style="display: flex; width: 100%; position: sticky; top: 0; background-color: rgb(254, 253, 252); z-index: 1;">
+      <div class="row" style="display: flex; width: 100%; position: sticky; top: 0; background-color: rgb(254, 253, 252); z-index: 1;">
         <div class="col" style="flex: 1 1 25%; text-align: center; font-weight: bold;">
           <h5>Facts</h5>
         </div>
@@ -22,37 +26,39 @@
       </div>
 
       <form>
+        <!-- Loop through formSections -->
         <div *ngFor="let section of formSections; let i = index" class="row">
-          <div class="col">
+          
+          <!-- Expression Component for each section -->
+          <div class="row">
             <app-expression 
-              [categories]="categories"
-              [opList]="opList[i]"
-              [section]="section"
-              [index]="i"
-              (onCategoryChange)="onSelectChange($event, i)"
-              (onOperationSelect)="selectOperation($event, i)"
-              (onTypeChange)="onTypeChange($event, i)"
-              (onFactSelected)="onFactSelected($event, i)">
-            </app-expression>
-          </div> -->
+            [categories]="categories"
+            [opList]="opList[i]"
+            [section]="section"
+            [index]="i"
+            (onCategoryChange)="handleCategoryChange($event, i)"
+            (onOperationChange)="handleOperationChange($event, i)"
+            (onTypeChange)="handleTypeChange($event, i)">
+          </app-expression>
+          </div>
 
-          <!-- Add the center-aligned radio buttons inside the container div -->
-          <!-- <div *ngIf="i < totalComp">
-            <input cFormCheckInput type="radio" value="one" name="flexRadioDefault" />
+          <!-- Center-aligned radio buttons inside the container div -->
+          <div *ngIf="i < totalComp" class="col text-center">
+            <!-- Radio buttons for logical conditions -->
+            <input cFormCheckInput type="radio" value="and" name="flexRadioDefault{{i}}" [(ngModel)]="formSections[i].relation" (change)="onRelationChange($event, i)" />
             <label cFormCheckLabel>And</label>
 
-            <input cFormCheckInput type="radio" value="two" name="flexRadioDefault" checked />
+            <input cFormCheckInput type="radio" value="or" name="flexRadioDefault{{i}}" [(ngModel)]="formSections[i].relation" (change)="onRelationChange($event, i)" checked />
             <label cFormCheckLabel>Or</label>
           </div>
         </div>
       </form>
-      
     </div>
-  -->
-    <!-- <c-modal-footer>
+
+    <!-- Modal Footer with action buttons -->
+    <c-modal-footer>
       <button cButton color="secondary" (click)="createComponent()">New</button>
       <button cButton color="primary" (click)="onDone()">Done</button>
     </c-modal-footer>
   </c-modal>
-</div>  -->
-<h1>Hello</h1>
+</div>
