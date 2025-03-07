@@ -27,29 +27,22 @@
 
       <form>
         <!-- Loop through formSections -->
-        <div *ngFor="let section of formSections; let i = index" class="row">
+        <div *ngFor="let section of expressions; let i = index" class="row">
           
           <!-- Expression Component for each section -->
           <div class="row">
             <app-expression 
-            [categories]="categories"
+          
             [opList]="opList[i]"
+            [facts]="facts"
             [section]="section"
+            [operators] = "operations"
             [index]="i"
             (onCategoryChange)="handleCategoryChange($event, i)"
             (onOperationChange)="handleOperationChange($event, i)"
-            (onTypeChange)="handleTypeChange($event, i)">
+            (onTypeChange)="handleTypeChange($event, i)"
+            (onRelationChange)="handleRelationChange($event, i)">
           </app-expression>
-          </div>
-
-          <!-- Center-aligned radio buttons inside the container div -->
-          <div *ngIf="i < totalComp" class="col text-center">
-            <!-- Radio buttons for logical conditions -->
-            <input cFormCheckInput type="radio" value="and" name="flexRadioDefault{{i}}" [(ngModel)]="formSections[i].relation" (change)="onRelationChange($event, i)" />
-            <label cFormCheckLabel>And</label>
-
-            <input cFormCheckInput type="radio" value="or" name="flexRadioDefault{{i}}" [(ngModel)]="formSections[i].relation" (change)="onRelationChange($event, i)" checked />
-            <label cFormCheckLabel>Or</label>
           </div>
         </div>
       </form>
@@ -57,8 +50,9 @@
 
     <!-- Modal Footer with action buttons -->
     <c-modal-footer>
-      <button cButton color="secondary" (click)="createComponent()">New</button>
       <button cButton color="primary" (click)="onDone()">Done</button>
+      <button cButton color="primary" (click)="createComponent('and')">AND</button>
+      <button cButton color="primary" (click)="createComponent('or')">OR</button>
     </c-modal-footer>
   </c-modal>
 </div>
