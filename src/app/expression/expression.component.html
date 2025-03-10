@@ -35,7 +35,7 @@
     </div>
   
     <div class="col" style="flex: 1 1 22%;">
-      <ng-container *ngIf="section.isFact; else textField">
+      <ng-container *ngIf="expression[index].typeOfValue === 'fact'; else textField">
         <select class="form-select" id="valueDropdown{{index}}" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required>
           <option value="" disabled selected>Select a value</option>
           <option *ngFor="let value of valueOptions" [value]="value.name">{{ value.name }}</option>

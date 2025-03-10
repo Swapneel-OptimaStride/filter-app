@@ -8,14 +8,14 @@ import { ButtonModule, GridModule } from '@coreui/angular';
   templateUrl: './expression.component.html',
   styleUrls: ['./expression.component.scss'],
   standalone: true,
-  imports: [CommonModule, GridModule, FormsModule,ButtonModule],
+  imports: [CommonModule, GridModule, FormsModule, ButtonModule],
 })
 export class ExpressionComponent implements OnInit {
   @Input() categories: any[] = [];
   @Input() opList: any = [];
   @Input() section: any = [];
   @Input() index!: number;
-  @Input() operators : any[] = [];
+  @Input() operators: any[] = [];
   @Input() facts: any[] = [];
   @Input() expression: any[] = [];
 
@@ -32,7 +32,7 @@ export class ExpressionComponent implements OnInit {
     // console.log(this.categories, "Setting Values here");
     // console.log(this.index, "Index");
     // console.log(this.opList, "Operation List");
-    console.log(" hey",this.facts);
+    console.log(" hey", this.facts);
     console.log(this.expression);
   }
 
@@ -48,11 +48,19 @@ export class ExpressionComponent implements OnInit {
 
   // Method to handle type change
   onTypeChangeHandler(event: any) {
+    // console.log(this.facts);
     const selectedType = event.target.value;
     this.onTypeChange.emit({ value: selectedType, index: this.index });
     if (selectedType === 'fact') {
-      const categoryType = this.categories.find(cat => cat.name === this.section.category)?.type;
-      this.valueOptions = this.categories.filter(cat => cat.type === categoryType && cat.name !== this.section.category);
+      // const categoryType = this.facts.find(cat => cat.name === this.section.category)?.type;
+      const categoryType = this.expression[this.index].fact;
+      // console.log(categoryType);
+      const type = this.facts.filter((cat) => cat.name === categoryType);
+      // console.log(type[0].type);
+      
+
+      this.valueOptions = this.facts.filter((cat) => cat.type === type[0].type && cat.name !== type[0].name);
+      // console.log(this.valueOptions);
     } else {
       this.valueOptions = [];
     }
@@ -68,13 +76,8 @@ export class ExpressionComponent implements OnInit {
     this.onDeleteSection.emit(this.index);
   }
 
-  onCategorychange(event:any)
-  {
-    // console.log("Category Changed",this.operators," ",event.target.value);
-    // console.log("Category Changed",this.operators);
-    // console.log(this.facts);
+  onCategorychange(event: any) {
     const categoryType = this.facts.find(cat => cat.name === event.target.value)?.type;
-    // console.log(categoryType);
     if (categoryType === 'String') {
       this.opList = this.operators.find(op => op.type === 'String Operations')?.ops || [];
     } else if (categoryType === 'Number') {
@@ -82,9 +85,5 @@ export class ExpressionComponent implements OnInit {
     } else if (categoryType === 'Boolean') {
       this.opList = this.operators.find(op => op.type === 'Boolean Operations')?.ops || [];
     }
-    // console.log(this.opList);
-
-
-
   }
 }
