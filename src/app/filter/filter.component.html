@@ -32,17 +32,18 @@
           <!-- Expression Component for each section -->
           <div class="row">
             <app-expression 
-          
             [opList]="opList[i]"
             [facts]="facts"
+            [expression]="expressions"
             [section]="section"
-            [operators] = "operations"
+            [operators]="operations"
             [index]="i"
             (onCategoryChange)="handleCategoryChange($event, i)"
             (onOperationChange)="handleOperationChange($event, i)"
             (onTypeChange)="handleTypeChange($event, i)"
-            (onRelationChange)="handleRelationChange($event, i)">
-          </app-expression>
+            (onRelationChange)="handleRelationChange($event, i)"
+            (onDeleteSection)="handleDeleteSection($event)">
+            </app-expression>
           </div>
         </div>
       </form>

@@ -17,11 +17,13 @@ export class ExpressionComponent implements OnInit {
   @Input() index!: number;
   @Input() operators : any[] = [];
   @Input() facts: any[] = [];
+  @Input() expression: any[] = [];
 
   @Output() onCategoryChange = new EventEmitter<any>();
   @Output() onOperationChange = new EventEmitter<any>();
   @Output() onTypeChange = new EventEmitter<any>();
   @Output() onRelationChange = new EventEmitter<any>();
+  @Output() onDeleteSection = new EventEmitter<number>();
 
   formSections: any[] = []; // Example initialization, adjust as needed
   valueOptions: any[] = []; // Example initialization, adjust as needed
@@ -31,6 +33,7 @@ export class ExpressionComponent implements OnInit {
     // console.log(this.index, "Index");
     // console.log(this.opList, "Operation List");
     console.log(" hey",this.facts);
+    console.log(this.expression);
   }
 
   // Method to handle category change
@@ -59,6 +62,12 @@ export class ExpressionComponent implements OnInit {
   onRelationChangeHandler(event: any) {
     this.onRelationChange.emit({ value: event.target.value, index: this.index });
   }
+
+  // Method to handle delete section
+  onDeleteSectionHandler() {
+    this.onDeleteSection.emit(this.index);
+  }
+
   onCategorychange(event:any)
   {
     // console.log("Category Changed",this.operators," ",event.target.value);

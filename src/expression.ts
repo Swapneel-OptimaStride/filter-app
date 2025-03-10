@@ -1,8 +1,8 @@
 export interface Expression {
-    logicalOperator: "and"| "or" | "";
+    logicalOperator: "and"| "or" | '';
     fact: String;
     operator: String;
-    typeOfValue: "fact" | "value" | "formula";
+    typeOfValue: "fact" | "value" | "formula"| '';
     value: String;
     sequenceNo: number;
 }

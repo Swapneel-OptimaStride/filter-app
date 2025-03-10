@@ -24,13 +24,33 @@ import { Expression } from '../../expression';
     ModalModule, 
     PopoverModule, 
     TooltipModule,
-    ExpressionComponent
+    ExpressionComponent,
+  
   ]
 })
 export class FilterComponent implements OnInit {
   facts: any[] = [];  
   opList: any[] = [];  
-  expressions: any[] = [{ category: '', operation: '', value: '', isFact: false, relation: '' }];  // Form sections array
+  expressions: Expression[] = [
+    {
+      logicalOperator: '',
+      fact: '',
+      operator: '',
+      typeOfValue: '',
+      value: '',
+      sequenceNo: 0
+    }
+  ];  // Form sections array
+  
+
+//   export interface Expression {
+//     logicalOperator: "and"| "or" | "";
+//     fact: String;
+//     operator: String;
+//     typeOfValue: "fact" | "value" | "formula";
+//     value: String;
+//     sequenceNo: number;
+// }
   selectedCategory: any;  // Selected category from the dropdown
   selectedOperation: any;  // Selected operation
   selectedIndex: number = 0; 
@@ -54,6 +74,7 @@ export class FilterComponent implements OnInit {
       (error) => {
         console.error('Error fetching categories:', error);
       }
+      
     );
   }
 
@@ -61,7 +82,7 @@ export class FilterComponent implements OnInit {
   handleCategoryChange(event: any, index: number) {
     const value = event.value;
     console.log('Category changed:', value);
-    this.expressions[index].category = value;
+    this.expressions[index].fact = value;
     // Fetch operations based on selected category
     const categoryType = this.facts.find(cat => cat.name === value)?.type;
     console.log('Category type:', categoryType);
@@ -80,29 +101,47 @@ export class FilterComponent implements OnInit {
   handleOperationChange(event: any, index: number) {
     const value = event.value;
     console.log('Operation changed:', value);
-    this.expressions[index].operation = value;
+    this.expressions[index].operator = value;
   }
 
   // Handle type change from ExpressionComponent
   handleTypeChange(event: any, index: number) {
     const value = event.value;
     console.log('Type changed:', value);
-    this.expressions[index].isFact = value === 'fact';
+    this.expressions[index].typeOfValue = value;
   }
 
   // Handle relation change from ExpressionComponent
   handleRelationChange(event: any, index: number) {
     const value = event.value;
     console.log('Relation changed:', value);
-    this.expressions[index].relation = value;
+    this.expressions[index].logicalOperator = value;
+  }
+
+  // Handle delete section from ExpressionComponent
+  handleDeleteSection(index: number) {
+    this.expressions.splice(index, 1);
+    this.opList.splice(index, 1);
+    // Reassign sequence numbers for expressions below the deleted one
+    for (let i = index; i < this.expressions.length; i++) {
+      this.expressions[i].sequenceNo -= 1;
+    }
+    console.log(this.expressions);
   }
 
   // Add a new form section
   totalComp: number = 0;
-  createComponent(relation: string) {
-    this.expressions.push({ category: '', operation: '', value: '', isFact: false, relation: relation });
+  createComponent(relation: '' | 'and' | 'or') {
+    this.expressions.push({ logicalOperator: relation,
+      fact: '',
+      operator: '',
+      typeOfValue: '',
+      value: '',
+      sequenceNo: this.expressions.length});
     this.opList.push([]); // Ensure opList has an entry for the new section
     this.totalComp = this.totalComp + 1;
+    console.log('Total components:', this.totalComp);
+    console.log(this.expressions);
   }
 
   // Submit form data

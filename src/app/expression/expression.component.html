@@ -1,6 +1,18 @@
+<div class="row" *ngIf="expression[index].sequenceNo > 0">
+  <!-- Center-aligned radio buttons inside the container div -->
+  <div class="col text-center" style="display: flex; justify-content: center; align-items: center;">
+    <!-- Radio buttons for logical conditions -->
+    <input cFormCheckInput type="radio" value="and" name="flexRadioDefault{{index}}" (change)="onRelationChangeHandler($event)" [checked]="expression[index].logicalOperator === 'and'" />
+    <label cFormCheckLabel>And</label>
+  
+    <input cFormCheckInput type="radio" value="or" name="flexRadioDefault{{index}}" (change)="onRelationChangeHandler($event)" [checked]="expression[index].logicalOperator === 'or'" />
+    <label cFormCheckLabel>Or</label>
+  </div>
+</div>
+
 <div class="row">
     <div class="col" style="flex: 1 1 22%;">
-      <select class="form-select" id="dropdown{{index}}" required (change)="onCategoryChangeHandler($event)" (click) = "onCategorychange($event)" >
+      <select class="form-select" id="dropdown{{index}}" required (change)="onCategoryChangeHandler($event)" (click)="onCategorychange($event)">
         <option value="" disabled selected>Select an option</option>
         <option *ngFor="let fact of facts" [value]="fact.name">{{ fact.name }}</option>
       </select>
@@ -31,25 +43,14 @@
       </ng-container>
   
       <ng-template #textField>
-        <input type="text" class="form-control" id="textfield{{index}}" placeholder="Enter Value" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required >
+        <input type="text" class="form-control" id="textfield{{index}}" placeholder="Enter Value" [(ngModel)]="section.value" [ngModelOptions]="{standalone: true}" required>
       </ng-template>
     </div>
 
     <div class="col" style="flex: 1 1 10%;">
-      <button cButtonClose></button>
+      <button cButtonClose (click)="onDeleteSectionHandler()"></button>
     </div>
 </div>
 
-<div class="row">
-    <!-- Center-aligned radio buttons inside the container div -->
-    <div class="col text-center" style="display: flex; justify-content: center; align-items: center;">
-      <!-- Radio buttons for logical conditions -->
-      <input cFormCheckInput type="radio" value="and" name="flexRadioDefault{{index}}" (change)="onRelationChangeHandler($event)" [checked]="section.relation === 'and'" />
-      <label cFormCheckLabel>And</label>
-    
-      <input cFormCheckInput type="radio" value="or" name="flexRadioDefault{{index}}" (change)="onRelationChangeHandler($event)" [checked]="section.relation === 'or'" />
-      <label cFormCheckLabel>Or</label>
-    </div>
-</div>
 
 
