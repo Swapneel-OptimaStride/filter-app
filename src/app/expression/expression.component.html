@@ -1,16 +1,16 @@
-<div class="row" *ngIf="expression[index].sequenceNo > 0">
+<div class="row" *ngIf="expression[index].sequenceNo > 0" style="margin-bottom: 2.25px;">
   <!-- Center-aligned radio buttons inside the container div -->
-  <div class="col text-center" style="display: flex; justify-content: center; align-items: center;">
+  <div class="col text-center" style="display: flex; justify-content: center; align-items: center; margin: 4px; padding: 5px; padding-bottom: 5px;">
     <!-- Radio buttons for logical conditions -->
     <input cFormCheckInput type="radio" value="and" name="flexRadioDefault{{index}}" (change)="onRelationChangeHandler($event)" [checked]="expression[index].logicalOperator === 'and'" />
-    <label cFormCheckLabel>And</label>
+    <label cFormCheckLabel style="margin-right: 10px;">And</label>
   
     <input cFormCheckInput type="radio" value="or" name="flexRadioDefault{{index}}" (change)="onRelationChangeHandler($event)" [checked]="expression[index].logicalOperator === 'or'" />
     <label cFormCheckLabel>Or</label>
   </div>
 </div>
 
-<div class="row">
+<div class="row" style="margin-bottom: 17.25px;">
     <div class="col" style="flex: 1 1 22%;">
       <select class="form-select" id="dropdown{{index}}" required (change)="onCategoryChangeHandler($event)" (click)="onCategorychange($event)">
         <option value="" disabled selected>Select an option</option>

@@ -6,28 +6,29 @@
   <c-modal #withPopoverModal alignment="center" id="withPopoverModal" style="width: 600px; height: 600px;">
     
     <!-- Modal Header -->
-    <c-modal-header style="padding-top: 3px;">
+    <c-modal-header style="padding: 10px;">
       <button [cModalToggle]="withPopoverModal.id" cButtonClose></button>
     </c-modal-header>
+    
 
     <div class="container mt-5 form-scroll-container" style="overflow-y: auto; height: 240px;">
       <!-- Fixed Heading for Facts, Operations, and Values -->
       <div class="row" style="display: flex; width: 100%; position: sticky; top: 0; background-color: rgb(254, 253, 252); z-index: 1;">
-        <div class="col" style="flex: 1 1 25%; text-align: center; font-weight: bold;">
+        <div class="col" style="flex: 1 1 30%; text-align: center; font-weight: bold;">
           <h5>Facts</h5>
         </div>
-        <div class="col" style="flex: 1 1 25%; text-align: center; font-weight: bold;">
+        <div class="col" style="flex: 1 1 30%; text-align: center; font-weight: bold;">
           <h5>Operations</h5>
         </div>
-        <div class="col" style="flex: 1 1 25%; text-align: center; font-weight: bold;">
+        <div class="col" style="flex: 1 1 30%; text-align: center; font-weight: bold;">
           <h5>Values</h5>
         </div>
-        <div class="col" style="flex: 1 1 25%;"></div>
+        <div class="col" style="flex: 1 1 10%;"></div>
       </div>
 
       <form>
         <!-- Loop through formSections -->
-        <div *ngFor="let section of expressions; let i = index" class="row">
+        <div *ngFor="let section of expressions; let i = index" class="row" style="margin-bottom: 2px; padding: 5px;">
           
           <!-- Expression Component for each section -->
           <div class="row">
@@ -50,10 +51,14 @@
     </div>
 
     <!-- Modal Footer with action buttons -->
-    <c-modal-footer>
-      <button cButton color="primary" (click)="onDone()">Done</button>
-      <button cButton color="primary" (click)="createComponent('and')">AND</button>
-      <button cButton color="primary" (click)="createComponent('or')">OR</button>
+    <c-modal-footer style="display: flex; justify-content: space-between;">
+      <div>
+        <button cButton (click)="createComponent('and')" style="margin-right: 5px; border: none; background: none; color: blue; font-weight: bold;">AND</button>
+        <button cButton (click)="createComponent('or')" style="border: none; background: none; color: blue; font-weight: bold;">OR</button>
+      </div>
+      <div>
+        <button cButton color="primary" (click)="onDone()">Done</button>
+      </div>
     </c-modal-footer>
   </c-modal>
 </div>

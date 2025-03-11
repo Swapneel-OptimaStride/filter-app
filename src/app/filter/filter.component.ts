@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ButtonDirective, ButtonGroupComponent, FormCheckInputDirective, FormCheckLabelDirective, FormModule, GridModule, ModalModule, PopoverModule, TooltipModule } from '@coreui/angular';
+import { ButtonCloseDirective, ButtonDirective, ButtonGroupComponent, FormCheckInputDirective, FormCheckLabelDirective, FormModule, GridModule, ModalHeaderComponent, ModalModule, PopoverModule, TooltipModule } from '@coreui/angular';
 import { ExpressionComponent } from '../expression/expression.component';  
 import { Expression } from '../../expression';
 
@@ -25,6 +25,8 @@ import { Expression } from '../../expression';
     PopoverModule, 
     TooltipModule,
     ExpressionComponent,
+    ButtonCloseDirective,
+    ModalModule,ModalHeaderComponent
   
   ]
 })
